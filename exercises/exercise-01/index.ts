@@ -40,7 +40,9 @@ interface Admin {
     role: string;
 }
 
-const persons: User[] /* <- Person[] */ = [
+type Person = Admin | User; 
+
+const persons: Person[] /* <- Person[] */ = [
     {
         name: 'Max Mustermann',
         age: 25,
@@ -63,8 +65,8 @@ const persons: User[] /* <- Person[] */ = [
     }
 ];
 
-function logPerson(user: User) {
-    console.log(` - ${chalk.green(user.name)}, ${user.age}`);
+function logPerson(person: Person) {
+    console.log(` - ${chalk.green(person.name)}, ${person.age}`);
 }
 
 persons.forEach(logPerson);
