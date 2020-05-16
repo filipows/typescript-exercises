@@ -71,8 +71,19 @@ type ApiResponse<T> = (
     }
 );
 
-function promisify(arg: unknown): unknown {
-    return null;
+
+function promisify<T>(requestFn: ( callback: (response: ApiResponse<T>) => void  ) => void ): () => Promise<T>  {
+    return () => 
+        new Promise( (resolve, reject) => {
+            requestFn( (response) => {
+                if (response.status === 'success') {
+                    resolve(response.data);
+                } else {
+                    reject(response.error);
+                }
+            } )
+       })    
+    
 }
 
 const oldApi = {
