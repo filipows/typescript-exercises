@@ -2,5 +2,9 @@
 import 'date-wizard';
 
 declare module 'date-wizard' {
-    // Add your module extensions here.
+    export interface DateDetails {
+        hours: number;
+    }
+
+    export function pad(v: number): string;
 }
